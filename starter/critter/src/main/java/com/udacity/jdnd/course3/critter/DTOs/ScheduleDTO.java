@@ -1,6 +1,6 @@
 package com.udacity.jdnd.course3.critter.DTOs;
 
-import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
+import com.udacity.jdnd.course3.critter.helper.EmployeeSkill;
 
 import java.time.LocalDate;
 import java.util.List;
