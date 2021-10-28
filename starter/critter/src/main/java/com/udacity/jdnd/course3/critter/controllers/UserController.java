@@ -3,15 +3,19 @@ package com.udacity.jdnd.course3.critter.controllers;
 import com.udacity.jdnd.course3.critter.DTOs.CustomerDTO;
 import com.udacity.jdnd.course3.critter.DTOs.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.DTOs.EmployeeRequestDTO;
+import com.udacity.jdnd.course3.critter.controllers.services.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Set;
 
 /**
  * Handles web requests related to Users.
- *
+ * <p>
  * Includes requests for both customers and employees. Splitting this into separate user and customer controllers
  * would be fine too, though that is not part of the required scope for this class.
  */
@@ -19,18 +23,24 @@ import java.util.Set;
 @RequestMapping("/user")
 public class UserController {
 
+    @PersistenceContext
+    EntityManager entityManager;
+
+    @Autowired
+    CustomerService customerService;
+
     @PostMapping("/customer")
-    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        throw new UnsupportedOperationException();
+    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
+        return customerService.saveCustomer(customerDTO);
     }
 
     @GetMapping("/customer")
-    public List<CustomerDTO> getAllCustomers(){
-        throw new UnsupportedOperationException();
+    public List<CustomerDTO> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/customer/pet/{petId}")
-    public CustomerDTO getOwnerByPet(@PathVariable long petId){
+    public CustomerDTO getOwnerByPet(@PathVariable long petId) {
         throw new UnsupportedOperationException();
     }
 
@@ -53,5 +63,4 @@ public class UserController {
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
         throw new UnsupportedOperationException();
     }
-
 }
