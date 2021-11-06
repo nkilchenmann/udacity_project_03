@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class Person {
+public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -21,7 +21,7 @@ public class Pet {
     private LocalDate birthDate;
     private String notes;
     @ManyToOne
-    private Customer ownerId;
+    private Customer owner;
     @ManyToOne
-    private Schedule petSchedule;
+    private Schedule schedule;
 }

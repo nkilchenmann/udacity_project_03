@@ -13,9 +13,17 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Employee extends Person {
+
+/*@NamedQueries(
+        @NamedQuery(
+                name = "Employee.findByRequiredSkillsetAndDaysAvailable",
+                query = "select e from Employee e where e.skills in ?1 and e.daysAvailable in ?2"
+        )
+)*/
+
+public class Employee extends User {
     @ManyToOne
-    private Schedule employeeSchedule;
+    private Schedule schedule;
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private Set<EmployeeSkill> skills;

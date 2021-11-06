@@ -17,9 +17,9 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany(mappedBy = "employeeSchedule")
+    @OneToMany(mappedBy = "schedule")
     private Set<Employee> employees;
-    @OneToMany(mappedBy = "petSchedule")
+    @OneToMany(mappedBy = "schedule")
     private Set<Pet> pets;
     @ElementCollection
     @Enumerated(EnumType.STRING)
