@@ -17,12 +17,16 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany(mappedBy = "schedule")
+
+    @ManyToMany(mappedBy = "schedule")
     private Set<Employee> employees;
-    @OneToMany(mappedBy = "schedule")
+
+    @ManyToMany(mappedBy = "schedule")
     private Set<Pet> pets;
+
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private Set<EmployeeSkill> skills;
+
     private LocalDate date;
 }

@@ -15,6 +15,8 @@ import java.util.List;
 public class Customer extends User {
     @OneToMany(mappedBy = "owner")
     private List<Pet> ownedPets;
+
     private String phoneNumber;
+
     private String notes;
 }

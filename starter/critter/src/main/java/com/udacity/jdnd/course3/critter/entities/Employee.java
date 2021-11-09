@@ -22,11 +22,13 @@ import java.util.Set;
 )*/
 
 public class Employee extends User {
-    @ManyToOne
-    private Schedule schedule;
+    @ManyToMany
+    private Set<Schedule> schedule;
+
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private Set<EmployeeSkill> skills;
+
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private Set<DayOfWeek> daysAvailable;
