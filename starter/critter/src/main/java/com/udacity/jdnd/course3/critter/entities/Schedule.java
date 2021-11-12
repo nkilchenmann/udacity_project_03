@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,10 +20,10 @@ public class Schedule {
     private Long id;
 
     @ManyToMany(mappedBy = "schedule")
-    private Set<Employee> employees;
+    private List<Employee> employees;
 
     @ManyToMany(mappedBy = "schedule")
-    private Set<Pet> pets;
+    private List<Pet> pets;
 
     @ElementCollection
     @Enumerated(EnumType.STRING)

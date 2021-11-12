@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,5 +30,5 @@ public class Pet {
     private Customer owner;
 
     @ManyToMany
-    private Set<Schedule> schedule;
+    private List<Schedule> schedule;
 }

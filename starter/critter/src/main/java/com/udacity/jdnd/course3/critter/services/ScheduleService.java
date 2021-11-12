@@ -42,18 +42,18 @@ public class ScheduleService {
 
         // add the schedule to all associated employees
         if (scheduleDTO.getEmployeeIds() != null) {
-            for (Long employeeId : scheduleDTO.getEmployeeIds()) {
+            for (long employeeId : scheduleDTO.getEmployeeIds()) {
                 Employee employee = employeeRepository.findById(employeeId).get();
 
                 // check if set of schedule already contains entries
-                Set<Schedule> employeeScheduleSet = new HashSet<>();
+                List<Schedule> employeeScheduleList = new ArrayList<>();
                 if (employee.getSchedule() == null || employee.getSchedule().isEmpty()) {
-                    employeeScheduleSet.add(schedule);
-                    employee.setSchedule(employeeScheduleSet);
+                    employeeScheduleList.add(schedule);
+                    employee.setSchedule(employeeScheduleList);
                 } else {
-                    employeeScheduleSet = employee.getSchedule();
-                    employeeScheduleSet.add(schedule);
-                    employee.setSchedule(employeeScheduleSet);
+                    employeeScheduleList = employee.getSchedule();
+                    employeeScheduleList.add(schedule);
+                    employee.setSchedule(employeeScheduleList);
                 }
             }
         }
@@ -64,14 +64,14 @@ public class ScheduleService {
                 Pet pet = petRepository.findById(petId).get();
 
                 // check if set of schedule already contains entries
-                Set<Schedule> petScheduleSet = new HashSet<>();
+                List<Schedule> scheduleList = new ArrayList<>();
                 if (pet.getSchedule() == null || pet.getSchedule().isEmpty()) {
-                    petScheduleSet.add(schedule);
-                    pet.setSchedule(petScheduleSet);
+                    scheduleList.add(schedule);
+                    pet.setSchedule(scheduleList);
                 } else {
-                    petScheduleSet = pet.getSchedule();
-                    petScheduleSet.add(schedule);
-                    pet.setSchedule(petScheduleSet);
+                    scheduleList = pet.getSchedule();
+                    scheduleList.add(schedule);
+                    pet.setSchedule(scheduleList);
                 }
             }
         }
@@ -170,19 +170,19 @@ public class ScheduleService {
         Schedule schedule = new Schedule();
 
         // retrieve all linked pets
-        Set<Pet> petSet = new HashSet<>();
+        List<Pet> petSet = new ArrayList<>();
         for (Long petId : scheduleDTO.getPetIds()) {
             petSet.add(petRepository.findById(petId).get());
         }
 
         // retrieve all linked employees
-        Set<Employee> employeeSet = new HashSet<>();
+        List<Employee> employeeList = new ArrayList<>();
         for (Long employeeId : scheduleDTO.getEmployeeIds()) {
-            employeeSet.add(employeeRepository.findById(employeeId).get());
+            employeeList.add(employeeRepository.findById(employeeId).get());
         }
 
         schedule.setId(scheduleDTO.getId());
-        schedule.setEmployees(employeeSet);
+        schedule.setEmployees(employeeList);
         schedule.setPets(petSet);
         schedule.setSkills(scheduleDTO.getActivities());
         schedule.setDate(scheduleDTO.getDate());

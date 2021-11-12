@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +23,9 @@ import java.util.Set;
 )*/
 
 public class Employee extends User {
+
     @ManyToMany
-    private Set<Schedule> schedule;
+    private List<Schedule> schedule;
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
