@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -128,15 +126,15 @@ public class ScheduleService {
         Customer customer = customerRepository.findById(customerId).get();
 
         //iterate through the owned pets of the retrieved customer and collect all schedules
-        Set<Schedule> scheduleSet = new HashSet<>();
+        List<Schedule> scheduleList = new ArrayList<>();
         if (customer.getOwnedPets() != null || !customer.getOwnedPets().isEmpty()) {
             for (Pet pet : customer.getOwnedPets()) {
-                scheduleSet.addAll(petRepository.findById(pet.getId()).get().getSchedule());
+                scheduleList.addAll(petRepository.findById(pet.getId()).get().getSchedule());
             }
         }
 
         // convert to DTOs
-        List<ScheduleDTO> scheduleDTOList = scheduleSet.stream().map(schedule -> convertScheduleToScheduleDTO(schedule)).collect(Collectors.toList());
+        List<ScheduleDTO> scheduleDTOList = scheduleList.stream().map(schedule -> convertScheduleToScheduleDTO(schedule)).collect(Collectors.toList());
 
         // return
         return scheduleDTOList;
@@ -170,9 +168,9 @@ public class ScheduleService {
         Schedule schedule = new Schedule();
 
         // retrieve all linked pets
-        List<Pet> petSet = new ArrayList<>();
+        List<Pet> petList = new ArrayList<>();
         for (Long petId : scheduleDTO.getPetIds()) {
-            petSet.add(petRepository.findById(petId).get());
+            petList.add(petRepository.findById(petId).get());
         }
 
         // retrieve all linked employees
@@ -183,7 +181,7 @@ public class ScheduleService {
 
         schedule.setId(scheduleDTO.getId());
         schedule.setEmployees(employeeList);
-        schedule.setPets(petSet);
+        schedule.setPets(petList);
         schedule.setSkills(scheduleDTO.getActivities());
         schedule.setDate(scheduleDTO.getDate());
 
