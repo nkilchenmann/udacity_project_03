@@ -34,7 +34,7 @@ public class EmployeeService {
     }
 
     public EmployeeDTO getEmployeeById(Long id) {
-        Employee employee = employeeRepository.findById(id).orElseThrow();
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("No Employee with id: + " + id + "exists."));
         return convertEmployeeToEmployeeDTO(employee);
     }
 
